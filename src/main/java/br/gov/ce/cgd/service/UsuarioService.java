@@ -20,10 +20,10 @@ public interface UsuarioService extends UserDetailsService {
     Usuario atualizarUsuario(Long id, Usuario usuario, String SenhaAtual);
     Page<Usuario> listarTodos(Pageable pageable);
     void deletarUsuario(Long id);
-    String enable2FA(Long id);
-    boolean validate2FA(Long id, int codigoValidador);
-    void disable2FA(Long id);
-    byte[] generateQRCode(Long id) throws IOException, WriterException;
+//    String enable2FA(Long id);
+//    boolean validate2FA(Long id, int codigoValidador);
+//    void disable2FA(Long id);
+//    byte[] generateQRCode(Long id) throws IOException, WriterException;
     boolean validarSenha(Usuario usuario, String senha);
 	void alterarSenha(Long id, String senhaAtual, String novaSenha, String confirmarNovaSenha);
 	Page<Usuario> buscarPorNome(String nome, Pageable pageable);

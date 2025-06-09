@@ -111,28 +111,6 @@ public class UsuarioController {
         model.addAttribute("usuarios", usuarios);
         return "usuarios/listar";
     }
-
-    @PostMapping("/{id}/enable2fa")
-    public String enable2FA(@PathVariable Long id, Model model) {
-        String qrCodeUrl = usuarioService.enable2FA(id);
-        model.addAttribute("qrCodeUrl", qrCodeUrl);
-        model.addAttribute("successMessage", "QR Code gerado e enviado para o e-mail!");
-        return "redirect:/usuarios";  
-    }
-
-    @GetMapping(value = "/{id}/qrcode", produces = "image/png")
-    public ResponseEntity<byte[]> getQRCode(@PathVariable Long id) throws Exception {
-        byte[] qrCodeImage = usuarioService.generateQRCode(id);
-        return ResponseEntity.ok().body(qrCodeImage);
-    }
-
-    @PostMapping("/{id}/validar")
-    public String validate2FA(@PathVariable Long id, @RequestParam int code, Model model) {
-        boolean isValid = usuarioService.validate2FA(id, code);
-        model.addAttribute("isValid", isValid);
-        return isValid ? "redirect:/solicitar" : "usuarios/login";
-    }
-
     @GetMapping("/alterar-senha")
     public String alterarSenha(HttpSession session, Model model) {
         Long usuarioId = (Long) session.getAttribute("usuarioId");
@@ -147,6 +125,7 @@ public class UsuarioController {
         
         return "redirect:/usuarios"; 
     }
+    
     @PostMapping("/alterar-senha")
     public String alterarSenha(@RequestParam String senhaAtual,
                                @RequestParam String novaSenha,
@@ -175,4 +154,28 @@ public class UsuarioController {
 
         return "redirect:/dashboard";
     }
+    
+
+//  @PostMapping("/{id}/enable2fa")
+//  public String enable2FA(@PathVariable Long id, Model model) {
+//      String qrCodeUrl = usuarioService.enable2FA(id);
+//      model.addAttribute("qrCodeUrl", qrCodeUrl);
+//      model.addAttribute("successMessage", "QR Code gerado e enviado para o e-mail!");
+//      return "redirect:/usuarios";  
+//  }
+//
+//  @GetMapping(value = "/{id}/qrcode", produces = "image/png")
+//  public ResponseEntity<byte[]> getQRCode(@PathVariable Long id) throws Exception {
+//      byte[] qrCodeImage = usuarioService.generateQRCode(id);
+//      return ResponseEntity.ok().body(qrCodeImage);
+//  }
+//
+//  @PostMapping("/{id}/validar")
+//  public String validate2FA(@PathVariable Long id, @RequestParam int code, Model model) {
+//      boolean isValid = usuarioService.validate2FA(id, code);
+//      model.addAttribute("isValid", isValid);
+//      return isValid ? "redirect:/solicitar" : "usuarios/login";
+//  }
+
+
 }

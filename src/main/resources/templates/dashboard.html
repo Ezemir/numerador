@@ -69,9 +69,10 @@
 					<i class="bi bi-shield-lock-fill"></i> Alterar Senha
 				</button>
 
-				<a th:href="@{/logout}" class="btn btn-danger"> <i
-					class="bi bi-box-arrow-right"></i> Sair
-				</a>
+				<button type="button" class="btn btn-danger mb-2"
+					onclick="abrirModalLogout()">
+				    <i class="bi bi-box-arrow-right"></i> Sair
+				</button>
 			</div>
 		</aside>
 
@@ -87,15 +88,15 @@
 								data-bs-toggle="tab" data-bs-target="#conteudo-dashboard"
 								type="button" role="tab">Dashboard</button>
 						</li>
-						<li class="nav-item" role="presentation">
+						<li class="nav-item" role="presentation" th:unless="${usuarioPerfil == 'USER'}">
 							<button class="nav-link" id="tab-usuarios" data-bs-toggle="tab"
 								data-bs-target="#conteudo-usuarios" type="button" role="tab">Usuários</button>
 						</li>
-						<li class="nav-item" role="presentation">
+						<li class="nav-item" role="presentation" th:unless="${usuarioPerfil == 'USER'}">
 							<button class="nav-link" id="tab-documentos" data-bs-toggle="tab"
 								data-bs-target="#conteudo-documentos" type="button" role="tab">Documentos</button>
 						</li>
-						<li class="nav-item" role="presentation">
+						<li class="nav-item" role="presentation" th:unless="${usuarioPerfil == 'USER'}">
 							<button class="nav-link" id="tab-cartorios" data-bs-toggle="tab"
 								data-bs-target="#conteudo-cartorios" type="button" role="tab">Cartórios</button>
 						</li>
@@ -148,6 +149,7 @@
 		<div th:replace="fragments/modal-cadastrar-cartorios :: modalCadastrarCartorios"></div>
 		<div th:replace="fragments/modal-alterar-senha :: modalAlterarSenha"></div>
 		<div th:replace="fragments/modal-gerar-documento :: modalGerarDocumento"></div>
+		<div th:replace="~{fragments/modal-logout :: modalLogout}"></div>
 
 </body>
 

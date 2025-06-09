@@ -51,7 +51,6 @@
 								id="perfil" th:field="*{perfil}" class="form-select" required>
 								<option value="USER" selected>USER</option>
 								<option value="ADMIN">ADMIN</option>
-								<option value="MANAGER">MANAGER</option>
 							</select>
 						</div>
 
@@ -60,18 +59,13 @@
 								id="status" th:field="*{status}" class="form-select" required>
 								<option value="ATIVO" selected>ATIVO</option>
 								<option value="INATIVO">INATIVO</option>
-								<option value="BLOQUEADO">BLOQUEADO</option>
 							</select>
 						</div>
 					</div>
-
-
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Salvar</button>
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-success bi bi-floppy-fill"> Salvar</button>
+						<button type="button" class="btn btn-danger bi-stop-circle-fill" data-bs-dismiss="modal"> Cancelar</button>
 					</div>
-
 				</form>
 			</div>
 

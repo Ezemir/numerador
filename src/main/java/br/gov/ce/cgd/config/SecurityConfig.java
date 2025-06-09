@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/**/css/**", "/**/javascript/**", "/**/images/**", "/login/**").permitAll()
-                .antMatchers("/numerador/dashboard/**").hasAnyAuthority("USER", "ADMIN", "MANAGER")
+                .antMatchers("/numerador/dashboard/**").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().authenticated()
             .and()
             .exceptionHandling()
@@ -96,8 +96,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 response.sendRedirect("/numerador/dashboard/");
             } else if (usuario.getPerfil() == Perfil.USER) {
                 response.sendRedirect("/numerador/dashboard/");
-	        } else if (usuario.getPerfil() == Perfil.MANAGER) {
-	            response.sendRedirect("/numerador/dashboard/");
 	        }
         };
     }

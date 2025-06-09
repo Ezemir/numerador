@@ -39,7 +39,6 @@
           <option value="">Todos</option>
           <option value="ADMIN">Admin</option>
           <option value="USER">User</option>
-          <option value="MANAGER">Manager</option>
         </select>
       </div>
       <div class="col-md-2">
@@ -48,13 +47,12 @@
           <option value="">Todos</option>
           <option value="Ativo">Ativo</option>
           <option value="Inativo">Inativo</option>
-          <option value="Bloqueado">Bloqueado</option>
         </select>
       </div>
       <div class="col-md-2">
         <label class="d-block invisible">Botão</label>
         <button id="limparFiltros" type="button" class="btn btn-danger">
-          <i class="bi bi-broom"></i> Limpar
+          <i class="bi bi-trash-fill"></i> Limpar
         </button>
       </div>
     </div>
@@ -87,7 +85,7 @@
             <td th:text="${#temporals.format(usuario.dataLogin, 'dd/MM/yyyy HH:mm')}"></td>
             <td class="action-buttons text-center">
               <!-- Botão que chama o modal -->
-              <button type="button" class="btn btn-primary" th:onclick="'abrirModalEditarUsuario(' + ${usuario.id} + ')'"> Editar</button>
+              <button type="button" class="btn btn-success bi bi-pencil-fill" th:onclick="'abrirModalEditarUsuario(' + ${usuario.id} + ')'"> Editar</button>
             </td>
           </tr>
           <script th:src="@{/javascript/filtrar.js}"></script>

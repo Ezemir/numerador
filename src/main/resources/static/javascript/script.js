@@ -1,5 +1,5 @@
 // Tempo restante em segundos (20 minutos)
-let tempoRestante = 2000 * 60;
+let tempoRestante = 60 * 60;
 
 function contador() {
     let minutos = Math.floor(tempoRestante / 60);
@@ -38,11 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             data.forEach(doc => {
                 const row = document.createElement('tr');
+                const anoDocumento = new Date(doc.dataCadastro).getFullYear(); // Extrai o ano da dataCadastro
 
                 row.innerHTML = `
                     <td style="border: 1px solid #ccc; padding: 8px;">${doc.usuario.nome}</td>
                     <td style="border: 1px solid #ccc; padding: 8px;">${doc.tipoDocumento.nome}</td>
-                    <td style="border: 1px solid #ccc; padding: 8px;">${doc.numero}</td>
+                    <td style="border: 1px solid #ccc; padding: 8px;">${doc.numero}/${anoDocumento}</td>
                     <td style="border: 1px solid #ccc; padding: 8px;">${doc.cartorio.nome}</td>
                     <td style="border: 1px solid #ccc; padding: 8px;">${new Date(doc.dataCadastro).toLocaleString()}</td>
                 `;

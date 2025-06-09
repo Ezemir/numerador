@@ -23,12 +23,10 @@
             <label for="nome" class="form-label">Nome:</label>
             <input type="text" id="nome" th:field="*{nome}" class="form-control" placeholder="Digite o nome do cartório" required />
           </div>
-          
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          </div>
-          
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-success bi bi-floppy-fill"> Salvar</button>
+			<button type="button" class="btn btn-danger bi-stop-circle-fill" data-bs-dismiss="modal"> Cancelar</button>
+		</div>
         </form>
       </div>
       

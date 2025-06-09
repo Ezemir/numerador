@@ -187,62 +187,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    @Override
-    public String enable2FA(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
-
-        GoogleAuthenticatorKey key = googleAuthenticatorService.generateSecretKey();
-        usuario.setCodigoValidador(key.getKey());
-        usuarioRepository.save(usuario);
-
-        try {
-            sendQRCodeEmail(id);
-        } catch (IOException | WriterException | MessagingException e) {
-            throw new RuntimeException("Erro ao enviar o QR Code por e-mail.", e);
-        }
-
-        return googleAuthenticatorService.getQRCodeUrl("Numerador", usuario.getEmail(), key);
-    }
-
-    @Override
-    public boolean validate2FA(Long id, int codigoValidador) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
-
-        return googleAuthenticatorService.validateCode(usuario.getCodigoValidador(), codigoValidador);
-    }
-
-    @Override
-    public void disable2FA(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
-
-        usuario.setCodigoValidador(null);
-        usuarioRepository.save(usuario);
-    }
-
-    @Override
-    public byte[] generateQRCode(Long id) throws IOException, WriterException {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
-
-        String qrCodeUrl = String.format(
-                "otpauth://totp/%s:%s?secret=%s&issuer=%s",
-                "Numerador",
-                usuario.getEmail(),
-                usuario.getCodigoValidador(),
-                "Numerador"
-        );
-
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(qrCodeUrl, BarcodeFormat.QR_CODE, 300, 300);
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
-        return outputStream.toByteArray();
-    }
-
     private void validarUsuario(Usuario usuario) {
         if (usuario.getCpf() == null || usuario.getCpf().isEmpty()) {
             throw new IllegalArgumentException("CPF é obrigatório.");
@@ -267,9 +211,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuario.getStatus() == Status.INATIVO) {
             throw new DisabledException("Usuário inativo. Entre em contato com o suporte.");
         }
-        if (usuario.getStatus() == Status.BLOQUEADO) {
-            throw new LockedException("Usuário bloqueado. Entre em contato com o suporte.");
-        }
         if (usuario.getStatus() == null) {
             throw new LockedException("Entre em contato com o suporte.");
         }
@@ -279,8 +220,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         } else if (usuario.getPerfil() == Perfil.USER) {
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }else if (usuario.getPerfil() == Perfil.MANAGER) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
         }
 
         return User.builder()
@@ -294,15 +233,72 @@ public class UsuarioServiceImpl implements UsuarioService {
 //        return usuarioRepository.findByCodigoValidador(codigoValidador);
 //    }
 
-    public void sendQRCodeEmail(Long id) throws IOException, WriterException, MessagingException {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+//    public void sendQRCodeEmail(Long id) throws IOException, WriterException, MessagingException {
+//        Usuario usuario = usuarioRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+//
+//        byte[] qrCodeImage = generateQRCode(id);
+//
+//        String subject = "Seu QR Code para 2FA";
+//        String text = String.format("Olá %s, \n\nAqui está o seu QR Code para ativação do 2FA.", usuario.getNome());
+//
+//        emailService.sendEmailWithQRCode(usuario.getEmail(), subject, text, qrCodeImage);
+//    }
+    
+//  @Override
+//  public String enable2FA(Long id) {
+//      Usuario usuario = usuarioRepository.findById(id)
+//              .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+//
+//      GoogleAuthenticatorKey key = googleAuthenticatorService.generateSecretKey();
+//      usuario.setCodigoValidador(key.getKey());
+//      usuarioRepository.save(usuario);
+//
+//      try {
+//          sendQRCodeEmail(id);
+//      } catch (IOException | WriterException | MessagingException e) {
+//          throw new RuntimeException("Erro ao enviar o QR Code por e-mail.", e);
+//      }
+//
+//      return googleAuthenticatorService.getQRCodeUrl("Numerador", usuario.getEmail(), key);
+//  }
 
-        byte[] qrCodeImage = generateQRCode(id);
+//  @Override
+//  public boolean validate2FA(Long id, int codigoValidador) {
+//      Usuario usuario = usuarioRepository.findById(id)
+//              .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+//
+//      return googleAuthenticatorService.validateCode(usuario.getCodigoValidador(), codigoValidador);
+//  }
 
-        String subject = "Seu QR Code para 2FA";
-        String text = String.format("Olá %s, \n\nAqui está o seu QR Code para ativação do 2FA.", usuario.getNome());
+//  @Override
+//  public void disable2FA(Long id) {
+//      Usuario usuario = usuarioRepository.findById(id)
+//              .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+//
+//      usuario.setCodigoValidador(null);
+//      usuarioRepository.save(usuario);
+//  }
 
-        emailService.sendEmailWithQRCode(usuario.getEmail(), subject, text, qrCodeImage);
-    }
+//  @Override
+//  public byte[] generateQRCode(Long id) throws IOException, WriterException {
+//      Usuario usuario = usuarioRepository.findById(id)
+//              .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+//
+//      String qrCodeUrl = String.format(
+//              "otpauth://totp/%s:%s?secret=%s&issuer=%s",
+//              "Numerador",
+//              usuario.getEmail(),
+//              usuario.getCodigoValidador(),
+//              "Numerador"
+//      );
+//
+//      QRCodeWriter qrCodeWriter = new QRCodeWriter();
+//      BitMatrix bitMatrix = qrCodeWriter.encode(qrCodeUrl, BarcodeFormat.QR_CODE, 300, 300);
+//
+//      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//      MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
+//      return outputStream.toByteArray();
+//  }
+
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+</head>
+<!-- src/main/resources/templates/fragments/modal-logout.html -->
+<div th:fragment="modalLogout">
+  <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="modalLogoutLabel">Confirmação de Logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+          Deseja sair do sistema?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success bi bi-check-circle" data-bs-dismiss="modal"> Cancelar</button>
+          <a th:href="@{/logout}" class="btn btn-danger bi bi-box-arrow-right"> Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
