@@ -1,0 +1,164 @@
+/* Estilo geral */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container da tabela */
+.user-table-container {
+    width: 80%;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho */
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px 12px 0 0;
+}
+
+.user-header h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #333;
+    font-weight: 600;
+}
+
+.user-header .btn {
+    padding: 10px 25px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.user-header .btn:hover {
+    background-color: #218838;
+}
+
+/* Estilo da tabela */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.table thead {
+    background-color: #f1f1f1;
+    color: #495057;
+}
+
+.table thead th {
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.table tbody td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #f1f1f1;
+    color: #495057;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Botões de ação */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-buttons .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.btn:hover {
+    color: white !important;
+    transform: scale(1.05);
+}
+
+.action-buttons .btn-primary {
+    color: white;
+}
+
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+
+.action-buttons .btn-danger {
+    color: white;
+}
+
+.action-buttons .btn-info {
+    color: white;
+}
+
+/* Logout */
+.logout-container {
+    text-align: right;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo específico para o botão de logout */
+.logout-container .btn-logout {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+}
+
+.logout-container .btn-logout:hover {
+    background-color: #c82333; /* Cor do fundo no hover */
+    transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .user-table-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 10px;
+    }
+
+    .table tbody td {
+        font-size: 13px;
+    }
+}

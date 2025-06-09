@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d804951c-5df9-4afe-83dc-20f5e4f84ee2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="54"/>
+	<parameter name="tipoPolicia" class="java.lang.String"/>
+	<parameter name="abreviatura" class="java.lang.String"/>
+	<parameter name="nome" class="java.lang.String"/>
+	<parameter name="matricula" class="java.lang.String"/>
+	<parameter name="cpf" class="java.lang.String"/>
+	<background>
+		<band height="50"/>
+	</background>
+	<title>
+		<band height="306" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e6bb350c-a20b-417a-a0a7-a73f425886d7" x="91" y="239" width="363" height="67"/>
+				<textElement markup="none">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[TESTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="83680ccb-31f3-46f6-83be-c4e551017b00" key="textField-7" positionType="Float" x="31" y="138" width="510" height="30" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Serif" size="12"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[CERTIFICA, a vista de requerimento da parte interessada, que após consulta realizada no Sistema de Registro e Controle de Procedimentos Disciplinares (SISPROC) deste Órgão, até a presente data, NADA CONSTA em tramitação contra:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c493d041-564d-467f-b1e6-56af4d52ccdf" x="131" y="192" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{cpf}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

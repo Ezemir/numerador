@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Usuário</title>
+    <link rel="stylesheet" th:href="@{/numerador/css/adicionar.css}">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/jquery/dist/jquery.min.js}"></script>
+    <link th:href="@{/webjars/bootstrap-select/css/bootstrap-select.min.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Adicionar Usuário</h2>
+
+        <form action="/numerador/usuarios" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" required>
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+
+            <!-- Agrupar Perfil e Ativo na mesma linha -->
+            <div class="form-group row">
+                <div class="form-group row">
+				    <div class="col-md-6">
+				        <label for="perfil">Perfil:</label>
+				        <select id="perfil" name="perfil" class="form-control" required>
+				            <option value="USER" selected>USER</option>
+				            <option value="ADMIN">ADMIN</option>
+				             <option value="MANAGER">MANAGER</option>
+				        </select>
+				    </div>
+				
+				    <div class="col-md-6">
+				        <label for="status">Status:</label>
+				        <select id="status" name="status" class="form-control" required>
+				            <option value="ATIVO" selected>ATIVO</option>
+				            <option value="INATIVO">INATIVO</option>
+				            <option value="BLOQUEADO">BLOQUEADO</option>
+				        </select>
+				    </div>
+				</div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="/numerador/usuarios" class="cancel">
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

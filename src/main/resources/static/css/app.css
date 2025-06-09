@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+html, body { margin: 0; padding: 0; font: 12px Arial, Helvetica, sans-serif; text-align:center; background: #fff;}
+#footer {  margin: 0 auto; }
+#top { background: url(/numerador/images/bg_brasao.jpg) no-repeat right  #00723F; }
+
+#user_data { position: absolute; top: 0;  text-align: right; background: #fff;  line-height: 28px; font-size: 11px;}
+
+#top_left { color: #ffffff; font-size: 36px; font-weight: bold;}
+
+#rodape { 
+	bottom: 0; 
+	width: 100%; 
+    bottom: -5px;
+	text-align:center;
+	line-height: 60px; 
+	position: fixed; 
+	background:url(/numerador/images/bg_rodape.jpg);
+}
+
+#formText li {
+    color: #00956b;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#formText li span{
+	font-size: 17px;
+    color: #555;
+}
+
+
+
+legend { color:#00956B; font-weight:bold;}
+
+.ui-outputlabel-rfi {
+	font: bold;
+	color: #cc0000;
+	margin-left: -10px;
+	margin-right: -12px;
+	position: relative;	
+}
+
+.destacado {
+	text-decoration: underline; 
+	color: #00956b;
+}
+
+.campo input:focus, select:focus, textarea:focus { background:#FFFFCC; }
+.campo { float: left; padding: 0; color: #888; line-height: 25px; margin-top: 5px;}
+.campo label{ width:125px; color:#666; float:left; text-align:right; margin-right: 14px; margin-left: -20px; font-weight: bold; display: block; padding:0;}
+.campo input { clear: inherit; display:inline; float:left; text-align:left; margin-left: 2px; border:1px solid #CCC; padding:2px 4px 2px 4px;}
+.ui-selectonemenu .ui-selectonemenu-label { margin-top: -1px; margin-bottom: 2px; margin-left: 0px;}
+
+.campoBtns {
+	color: #888;
+    float: left;
+    line-height: 40px;
+    margin: 0 120px;
+    padding: 0;
+    width: 100%;
+}
+
+.titulo {
+    background: none repeat scroll 0 0 #cae1d7;
+    color: #4f8a75;
+    font-size: 16px;
+    margin-bottom: 0px;
+    padding: 5px;
+    width: 508px;
+}
+
+.required:after {
+  content:" *"; 
+  color: red;
+}
+
+.campoBtns button {
+	margin-right: 10px;
+}
+
+.logo {
+  float: right;
+}
+.clearfix {
+  overflow: auto;
+}
+.footercgd {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  overflow: auto;
+}
+
+.label{
+	display: inline-block; 
+	text-align: left;
+}
+
+.botao-canto-direito {
+    position: fixed; 
+    top: 70px;     
+    right: 30px;      
+    z-index: 1000;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editar Usuário</title>
+<link rel="stylesheet" th:href="@{/css/adicionar.css}">
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+<script th:src="@{/webjars/jquery/dist/jquery.min.js}"></script>
+<link
+	th:href="@{/webjars/bootstrap-select/css/bootstrap-select.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="form-container">
+		<h2>Editar Usuário</h2>
+
+		<form th:action="@{/usuarios/{id}(id=${usuario.id})}"
+			th:object="${usuario}" method="post">
+			<input type="hidden" name="_method" value="put" />
+			<!-- Pode manter isso por segurança -->
+
+			<input type="text" th:field="*{nome}" class="form-control" />
+			<input type="text" th:field="*{cpf}" class="form-control" /> 
+			<input type="password" name="senha" class="form-control" placeholder="Nova senha (opcional)" /> 
+			<select th:field="*{perfil}" class="form-control">
+				<option value="ADMIN">Administrador</option>
+				<option value="USUARIO">Usuário</option>
+			</select> <select th:field="*{status}" class="form-control">
+				<option value="ATIVO">Ativo</option>
+				<option value="INATIVO">Inativo</option>
+			</select>
+
+			<button type="submit">Salvar</button>
+		</form>
+
+	</div>
+</body>
+</html>

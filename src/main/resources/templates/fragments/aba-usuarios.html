@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Usuários</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <script th:src="@{/webjars/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <link th:href="@{/webjars/bootstrap-select/css/bootstrap-select.min.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+<!-- aba-usuarios.html -->
+<div th:fragment="abaUsuarios" class="table-responsive bg-white p-4 rounded shadow-sm">
+  <div style="height: 89vh; width: 87vw; box-sizing: border-box; padding: 1rem;">
+  
+    <button type="button" class="btn btn-success mb-2"
+      onclick="abrirModalCadastrarUsuarios()"
+      th:unless="${usuarioPerfil == 'USER'}">
+      <i class="bi bi-people-fill me-2"></i> Adicionar
+    </button>
+
+    <div class="row mt-1 mb-3">
+      <div class="col-md-3">
+        <label for="filtroNome">Nome:</label>
+        <input type="text" id="filtroNome" class="form-control" placeholder="Digite o nome" />
+      </div>
+      <div class="col-md-3">
+        <label for="filtroCPF">CPF:</label>
+        <input type="text" id="filtroCPF" class="form-control" placeholder="Digite o CPF" />
+      </div>
+      <div class="col-md-2">
+        <label for="filtroPerfil">Perfil:</label>
+        <select id="filtroPerfil" class="form-control">
+          <option value="">Todos</option>
+          <option value="ADMIN">Admin</option>
+          <option value="USER">User</option>
+          <option value="MANAGER">Manager</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="filtroStatus">Status:</label>
+        <select id="filtroStatus" class="form-control">
+          <option value="">Todos</option>
+          <option value="Ativo">Ativo</option>
+          <option value="Inativo">Inativo</option>
+          <option value="Bloqueado">Bloqueado</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label class="d-block invisible">Botão</label>
+        <button id="limparFiltros" type="button" class="btn btn-danger">
+          <i class="bi bi-broom"></i> Limpar
+        </button>
+      </div>
+    </div>
+
+    <!-- Área com tamanho fixo e rolagem para tabela -->
+    <div style="height: 60vh; overflow-y: auto;">
+      <table class="table table-bordered table-hover" style="table-layout: fixed; width: 100%;">
+        <thead class="table-light">
+          <tr style="text-align: center">
+            <th style="width: 50px;">ID</th>
+            <th style="width: 150px;">Nome</th>
+            <th style="width: 200px;">Email</th>
+            <th style="width: 120px;">CPF</th>
+            <th style="width: 100px;">Perfil</th>
+            <th style="width: 100px;">Status</th>
+            <th style="width: 140px;">Data do Cadastro</th>
+            <th style="width: 160px;">Último Login</th>
+            <th style="width: 80px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaUsuarios">
+          <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.nome}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.cpf}"></td>
+            <td th:text="${usuario.perfil}"></td>
+            <td th:text="${usuario.status}"></td>
+            <td th:text="${#temporals.format(usuario.dataCadastro, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(usuario.dataLogin, 'dd/MM/yyyy HH:mm')}"></td>
+            <td class="action-buttons text-center">
+              <!-- Botão que chama o modal -->
+              <button type="button" class="btn btn-primary" th:onclick="'abrirModalEditarUsuario(' + ${usuario.id} + ')'"> Editar</button>
+            </td>
+          </tr>
+          <script th:src="@{/javascript/filtrar.js}"></script>
+		  <div th:replace="fragments/modal-editar-usuario :: modalEditarUsuario"></div>
+          <script th:src="@{/javascript/modal.js}"></script>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	
+</head>
+
+<div class="modal fade" id="modalGerarDocumento" tabindex="-1" aria-labelledby="modalGerarDocumentoLabel" aria-hidden="true" th:fragment="modalGerarDocumento">
+  <div class="modal-dialog">
+    <form th:action="@{/documentos/gerar}" method="post" id="formGerarDocumento">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalGerarDocumentoLabel">Gerar Documento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="tipoDocumentoId" id="tipoDocumentoId" />
+
+          <div class="mb-3">
+            <label for="nomeDocumento" class="form-label">Tipo de Documento</label>
+            <input type="text" id="nomeDocumento" class="form-control" readonly />
+          </div>
+          
+          <div class="mb-3">
+            <label for="cartorioId" class="form-label">Selecione o Cartório</label>
+            <select name="cartorioId" id="cartorioId" class="form-select" required>
+              <option value="" disabled selected>Selecione um cartório</option>
+              <option th:each="cartorio : ${cartorios}" 
+                      th:value="${cartorio.id}" 
+                      th:text="${cartorio.nome}"></option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-success">Gerar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

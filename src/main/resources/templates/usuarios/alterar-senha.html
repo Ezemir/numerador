@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Senha</title>
+    <link rel="stylesheet" th:href="@{/css/adicionar.css}">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/jquery/dist/jquery.min.js}"></script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Alterar Senha</h2>
+        <div class="readonly-field"  >
+		    <div th:text="${usuario.nome}"></div>
+		    </br>
+		</div>
+
+        <form method="post" th:action="@{|/usuarios/alterar-senha|}">
+            <div>
+                <label for="senhaAtual">Senha Atual</label>
+                <input type="password" id="senhaAtual" name="senhaAtual" required/>
+            </div>
+            <div>
+                <label for="novaSenha">Nova Senha</label>
+                <input type="password" id="novaSenha" name="novaSenha" required/>
+            </div>
+            <div>
+                <label for="confirmarNovaSenha">Confirmar Nova Senha</label>
+                <input type="password" id="confirmarNovaSenha" name="confirmarNovaSenha" required/>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-danger" onclick="history.back()">Voltar</button>
+            </div>
+            
+            <span id="errorMessage" class="mensagem-erro" th:classappend="${errorMessage} ? 'visivel' : 'oculto'">
+                <span th:text="${errorMessage}"></span>
+                <br>
+                <span class="ok-btn" onclick="fecharMensagemErro()">OK</span>
+            </span>
+
+            <span id="successMessage" class="mensagem-sucesso" th:classappend="${successMessage} ? 'visivel' : 'oculto'">
+                <span th:text="${successMessage}"></span>
+                <br>
+                <span class="ok-btn" onclick="voltarPagina()">OK</span>
+            </span>
+        </form>
+    </div>
+
+    <style>
+        .mensagem-erro, .mensagem-sucesso {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none; /* Oculta inicialmente */
+            z-index: 1000;
+            font-size: 18px;
+        }
+
+        .visivel { display: block !important; }
+        .oculto { display: none !important; }
+
+        .ok-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .ok-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+
+    <script>
+        function fecharMensagemErro() {
+            document.getElementById("errorMessage").classList.add("oculto");
+        }
+
+        function voltarPagina() {
+            history.back();
+        }
+    </script>
+</body>
+</html>

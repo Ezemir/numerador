@@ -1,0 +1,59 @@
+<!-- fragments/modal-editar-usuario.html -->
+<div th:fragment="modalEditarUsuario">
+  <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <form id="formEditarUsuario" th:action="@{/usuarios/{id}(id=0)}" method="post">
+          <input type="hidden" name="_method" value="put" />
+          <input type="hidden" id="usuarioId" name="id" />
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditarUsuarioLabel">Editar Usuário</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="cpf" class="form-label">CPF:</label>
+              <input type="text" class="form-control" id="cpf" name="cpf" disabled />
+            </div>
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome:</label>
+              <input type="text" class="form-control" id="nome" name="nome" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail:</label>
+              <input type="email" class="form-control" id="email" name="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="senha" class="form-label">Senha:</label>
+              <input type="password" class="form-control" id="senha" name="senha" />
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="perfil" class="form-label">Perfil:</label>
+                <select id="perfil" name="perfil" class="form-control" required>
+                  <option value="USER">USER</option>
+                  <option value="ADMIN">ADMIN</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="status" class="form-label">Status:</label>
+                <select id="status" name="status" class="form-control" required>
+                  <option value="ATIVO">ATIVO</option>
+                  <option value="INATIVO">INATIVO</option>
+                  <option value="BLOQUEADO">BLOQUEADO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
